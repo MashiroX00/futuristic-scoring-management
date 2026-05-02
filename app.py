@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session, g
+from flask import Flask, request, jsonify, session, g, render_template
 import sqlite3
 import os
 from pathlib import Path
@@ -71,6 +71,14 @@ def login():
         return jsonify({"message": "Login successful", "professor": dict(professor)}), 200
     else:
         return jsonify({"error": "Invalid credentials"}), 401
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/app')
+def student_app():
+    return render_template('app.html')
 
 @app.route('/logout', methods=['POST'])
 def logout():

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Management | Futuristic Scoring{% endblock %}
+
+{% block content %}
+<section class="hero app-hero">
+  <div class="container hero-inner">
+    <p class="eyebrow">Student Management Portal</p>
+    <h1>Manage students securely with your professor login.</h1>
+    <p class="subtitle">Use the web application to view student records, register new students, and keep the academic roster up to date.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="#login-panel">Sign in</a>
+      <a class="button button-secondary" href="#student-management">Open dashboard</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div id="login-panel" class="app-panel">
+      <div class="panel-header">
+        <h2>Professor sign in</h2>
+        <p>Enter your ProfessorID and Email to unlock student management capabilities.</p>
+      </div>
+      <form id="login-form" class="form-grid">
+        <label class="field">
+          <span>Professor ID</span>
+          <input type="text" name="ProfessorID" id="ProfessorID" placeholder="e.g. P101" required>
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" name="Email" id="Email" placeholder="professor@example.edu" required>
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="button button-primary">Sign in</button>
+        </div>
+      </form>
+      <div id="login-status" class="status-message"></div>
+    </div>
+
+    <div id="student-management" class="app-panel hidden">
+      <div class="panel-header">
+        <h2>Student management dashboard</h2>
+        <p>Review registered students and add new student records directly through the application.</p>
+      </div>
+      <div class="app-grid">
+        <section class="card panel-card">
+          <div class="panel-card-header">
+            <h3>Student roster</h3>
+            <button id="refresh-students" class="button button-secondary">Refresh list</button>
+          </div>
+          <div class="table-wrap">
+            <table id="students-table" class="data-table">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>Enrollment Year</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="4" class="empty-row">Loading students...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card panel-card">
+          <h3>Add new student</h3>
+          <form id="student-form" class="form-grid">
+            <label class="field">
+              <span>Student ID</span>
+              <input type="text" name="StudentID" id="StudentID" placeholder="e.g. S202" required>
+            </label>
+            <label class="field">
+              <span>Name</span>
+              <input type="text" name="Name" id="StudentName" placeholder="Student full name" required>
+            </label>
+            <label class="field">
+              <span>Department ID</span>
+              <input type="text" name="DepartmentID" id="DepartmentID" placeholder="e.g. D01" required>
+            </label>
+            <label class="field">
+              <span>Enrollment Year</span>
+              <input type="number" name="EnrollmentYear" id="EnrollmentYear" min="2000" max="2100" placeholder="2026" required>
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="button button-primary">Create student</button>
+            </div>
+          </form>
+          <div id="student-status" class="status-message"></div>
+        </section>
+      </div>
+      <div class="panel-actions">
+        <button id="logout-button" class="button button-secondary">Logout</button>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

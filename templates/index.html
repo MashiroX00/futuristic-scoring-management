@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | Futuristic Scoring Management{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="eyebrow">Modern Academic Operations</p>
+    <h1>Secure, streamlined scoring for professors, students, and departments.</h1>
+    <p class="subtitle">A clean interface and robust backend API for managing enrollment, grades, professors, courses, and reporting.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="/app">Open Student App</a>
+      <a class="button button-secondary" href="#features">Explore Features</a>
+    </div>
+  </div>
+</section>
+
+<section id="overview" class="section section-alt">
+  <div class="container">
+    <h2>Designed for clarity, built for reliability</h2>
+    <p>Inspired by formal, institutional web design with a modern academic dashboard feel. This project brings your scoring management system to life with structured navigation, accessible layout, and polished branding.</p>
+  </div>
+</section>
+
+<section id="features" class="section section-grid">
+  <div class="container grid">
+    <article class="card">
+      <h3>Authentication & Access</h3>
+      <p>Login workflows protect professor resources while allowing public access to department and course listings.</p>
+    </article>
+    <article class="card">
+      <h3>Complete CRUD APIs</h3>
+      <p>Manage professors, students, courses, and departments with simple JSON endpoints for create, read, update, and delete.</p>
+    </article>
+    <article class="card">
+      <h3>Grading & Enrollment</h3>
+      <p>Track enrollments, assign grades, and search student results with a single integrated backend.</p>
+    </article>
+  </div>
+</section>
+
+<section id="api" class="section section-api">
+  <div class="container">
+    <h2>API Endpoints</h2>
+    <div class="api-list">
+      <div class="api-card">
+        <h4>Authentication</h4>
+        <p><code>POST /login</code>, <code>POST /logout</code></p>
+      </div>
+      <div class="api-card">
+        <h4>Professors</h4>
+        <p><code>GET /professors</code>, <code>POST /professors</code>, <code>PUT /professors/&lt;id&gt;</code>, <code>DELETE /professors/&lt;id&gt;</code></p>
+      </div>
+      <div class="api-card">
+        <h4>Students</h4>
+        <p><code>GET /students</code>, <code>POST /students</code></p>
+      </div>
+      <div class="api-card">
+        <h4>Grades & Enrollment</h4>
+        <p><code>GET /grades</code>, <code>PUT /grades/&lt;id&gt;</code>, <code>POST /enroll</code></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
