@@ -5,7 +5,6 @@ from pathlib import Path
 import sqlite3
 import sys
 
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Create the database from schema.sql."
