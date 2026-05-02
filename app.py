@@ -226,9 +226,11 @@ def get_courses():
 def create_course():
     data = request.get_json()
     db = get_db()
+    # Use session['professor_id'] to ensure the course belongs to the logged-in professor
+    professor_id = session.get('professor_id')
     try:
         db.execute('INSERT INTO Courses (CourseID, CourseName, ProfessorID, Credits) VALUES (?, ?, ?, ?)',
-                   (data.get('CourseID'), data.get('CourseName'), data.get('ProfessorID'), data.get('Credits')))
+                   (data.get('CourseID'), data.get('CourseName'), professor_id, data.get('Credits')))
         db.commit()
     except sqlite3.IntegrityError:
         return jsonify({"error": "CourseID already exists"}), 409
@@ -246,6 +248,28 @@ def get_all_grades():
         JOIN Students s ON g.StudentID = s.StudentID
         JOIN Courses c ON g.CourseID = c.CourseID
     ''')
+    return jsonify([dict(row) for row in cur.fetchall()]), 200
+
+@app.route('/professor/courses', methods=['GET'])
+@login_required
+def get_my_courses():
+    """Returns courses taught by the logged-in professor"""
+    db = get_db()
+    cur = db.execute('SELECT * FROM Courses WHERE ProfessorID = ?', (session['professor_id'],))
+    return jsonify([dict(row) for row in cur.fetchall()]), 200
+
+@app.route('/professor/grades', methods=['GET'])
+@login_required
+def get_my_students_grades():
+    """Returns grades for students in the logged-in professor's courses"""
+    db = get_db()
+    cur = db.execute('''
+        SELECT g.*, s.Name as StudentName, c.CourseName 
+        FROM Grades g
+        JOIN Students s ON g.StudentID = s.StudentID
+        JOIN Courses c ON g.CourseID = c.CourseID
+        WHERE c.ProfessorID = ?
+    ''', (session['professor_id'],))
     return jsonify([dict(row) for row in cur.fetchall()]), 200
 
 @app.route('/enroll', methods=['POST'])

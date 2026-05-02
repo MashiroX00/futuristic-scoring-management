@@ -9,11 +9,19 @@
     <h1>Secure, streamlined scoring for professors, students, and departments.</h1>
     <p class="subtitle">A clean interface and robust backend API for managing enrollment, grades, professors, courses, and reporting.</p>
     <div class="hero-actions">
-      <a class="button button-primary" href="/app">Open Student App</a>
-      <a class="button button-secondary" href="#features">Explore Features</a>
+      <div class="search-box">
+        <input type="text" id="student-search-input" placeholder="Enter student name..." class="field-input">
+        <button id="search-btn" class="button button-primary">Search Grades</button>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="container">
+  <div id="search-results" class="search-results-container hidden">
+    <!-- Results will be injected here -->
+  </div>
+</div>
 
 <section id="overview" class="section section-alt">
   <div class="container">
@@ -39,27 +47,4 @@
   </div>
 </section>
 
-<section id="api" class="section section-api">
-  <div class="container">
-    <h2>API Endpoints</h2>
-    <div class="api-list">
-      <div class="api-card">
-        <h4>Authentication</h4>
-        <p><code>POST /login</code>, <code>POST /logout</code></p>
-      </div>
-      <div class="api-card">
-        <h4>Professors</h4>
-        <p><code>GET /professors</code>, <code>POST /professors</code>, <code>PUT /professors/&lt;id&gt;</code>, <code>DELETE /professors/&lt;id&gt;</code></p>
-      </div>
-      <div class="api-card">
-        <h4>Students</h4>
-        <p><code>GET /students</code>, <code>POST /students</code></p>
-      </div>
-      <div class="api-card">
-        <h4>Grades & Enrollment</h4>
-        <p><code>GET /grades</code>, <code>PUT /grades/&lt;id&gt;</code>, <code>POST /enroll</code></p>
-      </div>
-    </div>
-  </div>
-</section>
 {% endblock %}

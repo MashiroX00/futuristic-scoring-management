@@ -13,8 +13,12 @@
       <a class="brand" href="/">Futuristic Scoring</a>
       <nav class="nav-links">
         <a href="/">Home</a>
-        <a href="/app">Student App</a>
-        <a href="#api">API</a>
+        {% if session.get('professor_id') %}
+          <a href="/app">Dashboard</a>
+          <a href="#" id="nav-logout">Logout</a>
+        {% else %}
+          <a href="/app">Professor Login</a>
+        {% endif %}
       </nav>
     </div>
   </header>
@@ -23,13 +27,11 @@
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>Futuristic Scoring Management © 2026</p>
-      <p>Serving academic systems with secure, government-style clarity.</p>
-    </div>
+  <footer>
+    ...
   </footer>
 
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>
